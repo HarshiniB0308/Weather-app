@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AeroWeather | Premium Forecasts</title>
+    <meta name="description" content="Accurate, real-time weather forecasts with a beautiful, modern interface.">
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Boxicons for standard icons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="style2.css">
+</head>
+
+<body>
+    <!-- Dynamic Background Layer -->
+    <div id="dynamic-bg" class="bg-default"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container container">
+            <a href="#" class="logo">
+                <i class='bx bx-cloud-light-rain'></i>
+                <span>AeroWeather</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <button class="cta-btn" id="nav-cta">Get Pro</button>
+            <div class="hamburger">
+                <i class='bx bx-menu'></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Hero Section -->
+        <section id="home" class="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <h1>Real-time weather, <br><span>redefined.</span></h1>
+                    <p>Experience precise, hyper-local forecasts packaged in an elegantly simple interface.</p>
+
+                    <form id="search-form" class="search-bar">
+                        <i class='bx bx-search'></i>
+                        <input type="text" id="city-input" placeholder="Search for a city (e.g., London, Tokyo)..."
+                            required autocomplete="off">
+                        <button type="submit">Search</button>
+                    </form>
+
+                    <button id="location-btn" class="location-btn">
+                        <i class='bx bx-current-location'></i> Use my location
+                    </button>
+                </div>
+
+                <!-- Weather Card Display -->
+                <div class="weather-display" id="weather-display" style="display: none;">
+                    <div class="glass-card weather-card">
+                        <div class="weather-header">
+                            <div class="location-info">
+                                <h2 id="city-name">--</h2>
+                                <p id="current-date">--</p>
+                            </div>
+                            <div class="unit-toggle">
+                                <span class="active" id="unit-c">°C</span>
+                                <span class="separator">|</span>
+                                <span id="unit-f">°F</span>
+                            </div>
+                        </div>
+
+                        <div class="weather-main">
+                            <div class="temp-section">
+                                <i class='bx bx-cloud' id="weather-icon-main"></i>
+                                <span class="temperature" id="temperature">--</span>
+                                <span class="unit" id="temp-unit">°C</span>
+                            </div>
+                            <div class="condition-desc" id="weather-description">--</div>
+                        </div>
+
+                        <div class="weather-details">
+                            <div class="detail-item">
+                                <i class='bx bx-water'></i>
+                                <div class="detail-info">
+                                    <span class="label">Humidity</span>
+                                    <span class="value" id="humidity">--%</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class='bx bx-wind'></i>
+                                <div class="detail-info">
+                                    <span class="label">Wind</span>
+                                    <span class="value" id="wind-speed">-- km/h</span>
+                                </div>
+                            </div>
+                            <div class="detail-item">
+                                <i class='bx bxs-thermometer'></i>
+                                <div class="detail-info">
+                                    <span class="label">Feels Like</span>
+                                    <span class="value" id="feels-like">--°</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading State -->
+                <div class="loading-spinner" id="loading-spinner" style="display: none;">
+                    <div class="spinner"></div>
+                    <p>Fetching weather data...</p>
+                </div>
+
+                <!-- Error State -->
+                <div class="error-message glass-card" id="error-message" style="display: none;">
+                    <i class='bx bx-error-circle'></i>
+                    <p id="error-text">Something went wrong.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why AeroWeather?</h2>
+                    <p>Designed for humans, powered by precision data.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card glass-card">
+                        <div class="icon-wrapper"><i class='bx bx-bolt-circle'></i></div>
+                        <h3>Lightning Fast</h3>
+                        <p>Powered by Open-Meteo, delivering millimeter-level precision without the wait or bloat.</p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <div class="icon-wrapper"><i class='bx bx-palette'></i></div>
+                        <h3>Adaptive UI</h3>
+                        <p>Our beautiful gradients and backgrounds dynamically adapt to the weather you're experiencing.
+                        </p>
+                    </div>
+                    <div class="feature-card glass-card">
+                        <div class="icon-wrapper"><i class='bx bx-globe'></i></div>
+                        <h3>Global Coverage</h3>
+                        <p>From bustling metropolises to remote villages, our geocoding API finds accurate forecasts
+                            everywhere.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="faq section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Frequently Asked Questions</h2>
+                    <p>Everything you need to know about our service.</p>
+                </div>
+                <div class="accordion">
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>Is AeroWeather completely free?</h3>
+                            <i class='bx bx-chevron-down'></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p>Yes! AeroWeather utilizes free open-source APIs like Open-Meteo to provide you with
+                                world-class data without any subscription costs.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>Are the forecasts real-time?</h3>
+                            <i class='bx bx-chevron-down'></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p>Absolutely. We fetch live data requests every time you search, ensuring you receive the
+                                latest updates direct from meteorological models.</p>
+                        </div>
+                    </div>
+                    <div class="accordion-item">
+                        <div class="accordion-header">
+                            <h3>How does the location feature work?</h3>
+                            <i class='bx bx-chevron-down'></i>
+                        </div>
+                        <div class="accordion-body">
+                            <p>By using the HTML5 Geolocation API, we request your browser's permission to find your
+                                coordinates, which are securely used to fetch your local weather. We don't store your
+                                location.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="contact section">
+            <div class="container contact-container">
+                <div class="contact-text">
+                    <h2>Get in Touch</h2>
+                    <p>Have feature requests or found a bug? Drop us a line. We'd love to hear from you.</p>
+                </div>
+                <div class="contact-form-wrapper glass-card">
+                    <form id="contact-form" class="contact-form">
+                        <div class="input-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" required placeholder="Jane Doe">
+                        </div>
+                        <div class="input-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" required placeholder="jane@example.com">
+                        </div>
+                        <div class="input-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" rows="4" required placeholder="How can we help?"></textarea>
+                        </div>
+                        <button type="submit" class="submit-btn" id="contact-submit">Send Message</button>
+                    </form>
+                    <div id="contact-success" style="display: none;" class="success-msg">
+                        <i class='bx bx-check-circle'></i> Message sent successfully!
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-container">
+            <div class="footer-logo">
+                <i class='bx bx-cloud-light-rain'></i>
+                <span>AeroWeather</span>
+            </div>
+            <p>&copy; 2026 AeroWeather. Powered by Open-Meteo.</p>
+            <div class="social-links">
+                <a href="#"><i class='bx bxl-twitter'></i></a>
+                <a href="#"><i class='bx bxl-github'></i></a>
+                <a href="#"><i class='bx bxl-dribbble'></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
